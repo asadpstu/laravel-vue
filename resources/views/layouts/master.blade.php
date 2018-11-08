@@ -67,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="{{asset('/img/profile.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Lara-vue Admin</a>
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -76,7 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
               <i class="fas fa-tachometer-alt"></i>
               <p>
@@ -106,15 +106,71 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-cog"></i>
+              <p>
+                Settings
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-cogs"></i>
+                  <p>Setting # 1</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-cogs"></i>
+                  <p>Setting # 2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-cogs"></i>
+                  <p>Setting # 3</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-award"></i>
               <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
+                New Update
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-user"></i>
+              <p>
+                User Profile
+                <span class="right badge badge-danger">View by - 89</span>
+              </p>
+            </a>
+          </li>
+
+          
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-power-off"></i>
+              <p>
+                Logout
+                
+              </p>
+            </a>
+          </li>
+        
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -129,7 +185,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
+            <h1 class="m-0 text-dark">Dashboard</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
