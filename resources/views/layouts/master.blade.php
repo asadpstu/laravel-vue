@@ -170,14 +170,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
           
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a  class="nav-link" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        
               <i class="fas fa-power-off"></i>
               <p>
-                Logout
+                {{ __('Logout') }}
                 
               </p>
             </a>
           </li>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+          </form>
+          
         
         </ul>
       </nav>
