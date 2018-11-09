@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//You user refresh page but content is from vue
+Route::get('{path}', "HomeController@index")->where('path','([A-z\d-\/_.]+)?');
