@@ -14,6 +14,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
   <link rel="stylesheet"  href="/css/app.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+
+  
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -67,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="{{asset('/img/profile.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="/home" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -121,51 +125,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link ">
               <i class="fas fa-cog"></i>
               <p>
-                Settings
+                Manage Settings
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-cogs"></i>
-                  <p>Setting # 1</p>
-                </a>
+                <router-link to="/users" class="nav-link">
+                  <i class="fas fa-user"></i>
+                  <p>
+                    Users Profile
+                  </p>
+                </router-link>
               </li>
+
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-cogs"></i>
-                  <p>Setting # 2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-cogs"></i>
-                  <p>Setting # 3</p>
-                </a>
+                <router-link to="/profile" class="nav-link">
+                  <i class="fas fa-user"></i>
+                  <p>
+                    User Profile
+                    <span class="right badge badge-danger">View by - 89</span>
+                  </p>
+                </router-link>
               </li>
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-award"></i>
-              <p>
-                New Update
-              </p>
-            </a>
-          </li>
 
-          <li class="nav-item">
-            <router-link to="/profile" class="nav-link">
-              <i class="fas fa-user"></i>
-              <p>
-                User Profile
-                <span class="right badge badge-danger">View by - 89</span>
-              </p>
-            </router-link>
-          </li>
 
           
 
@@ -200,6 +187,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content-header">
       <div class="container-fluid">
           <router-view></router-view>
+          <vue-progress-bar></vue-progress-bar>
+            
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -226,6 +215,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App 
 <script src="https://adminlte.io/themes/AdminLTE/dist/js/adminlte.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 </body>
 </html>

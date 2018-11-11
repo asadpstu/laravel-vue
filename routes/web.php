@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('dashboard');
+
+
+Route::get('api/authuser','Api\UserController@authuser');
 
 
 //You user refresh page but content is from vue
