@@ -66905,7 +66905,7 @@ var render = function() {
                     _c("td", [
                       _c("img", {
                         staticStyle: { height: "50px" },
-                        attrs: { src: "/img/" + singleuser.photo }
+                        attrs: { src: "/images/" + singleuser.photo }
                       })
                     ]),
                     _vm._v(" "),
@@ -68128,6 +68128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     onImageChange: function onImageChange(e) {
+      this.$Progress.start();
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
@@ -68141,18 +68142,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       reader.readAsDataURL(file);
     },
     uploadImage: function uploadImage() {
+      var _this4 = this;
+
+      this.$Progress.start();
       axios.post('/image/store', { image: this.image }).then(function () {
 
         toast({
           type: 'success',
           title: 'Sweet-Alert : Success! Please Refresh the Page.'
         });
+        _this4.$Progress.finish();
       }).catch(function () {
 
         toast({
           type: 'error',
           title: 'Sweet-Alert : Error!'
         });
+        _this4.$Progress.fail();
       });
     }
   },
@@ -68293,7 +68299,7 @@ var render = function() {
                                 staticClass: "col-sm-6 control-label",
                                 attrs: { for: "inputExperience" }
                               },
-                              [_vm._v("Upload Photo")]
+                              [_vm._v("Update old profile photo")]
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-sm-10" }, [
@@ -68320,7 +68326,7 @@ var render = function() {
                           _c("div", { staticClass: "form-group" }, [
                             _c(
                               "div",
-                              { staticClass: "col-sm-offset-2 col-sm-10" },
+                              { staticClass: "col-sm-offset-2 col-sm-3" },
                               [
                                 _c(
                                   "button",

@@ -31,7 +31,7 @@
                     <td>{{singleuser.name | capitalize}}</td>
                     <td>{{singleuser.email}}</td>
                     <td>{{singleuser.type  | capitalize}}</td>
-                    <td><img v-bind:src="'/img/' + singleuser.photo" style="height:50px"/></td>
+                    <td><img v-bind:src="'/images/' + singleuser.photo" style="height:50px"/></td>
                     <td>{{singleuser.created_at | datefilter}}</td>
                     <td>
                         <a href="#" @click="editform(singleuser)">

@@ -94,7 +94,7 @@ img.preview {
                   
                   <div class="form-group">
                     
-                        <label for="inputExperience" class="col-sm-6 control-label">Upload Photo</label>
+                        <label for="inputExperience" class="col-sm-6 control-label">Update old profile photo</label>
 
                         <div class="col-sm-10">
                         <input @change="onImageChange" type="file" name="file"  accept=".png, .jpg, .jpeg" />
@@ -108,7 +108,7 @@ img.preview {
                            </div>    
                       </div>
                       <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-2 col-sm-3">
                           <button class="btn btn-success btn-block" @click="uploadImage">Upload Image</button>
                         </div>
                       </div>
@@ -335,6 +335,7 @@ img.preview {
              })
            },
            onImageChange(e) {
+                this.$Progress.start();
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length)
                     return;
@@ -349,6 +350,7 @@ img.preview {
                 reader.readAsDataURL(file);
             },
             uploadImage(){
+                this.$Progress.start();
                 axios.post('/image/store',{image: this.image})
                 .then(()=>{
                   
@@ -356,7 +358,7 @@ img.preview {
                     type: 'success',
                     title: 'Sweet-Alert : Success! Please Refresh the Page.'
                   });
-
+                  this.$Progress.finish();
                 
                 })
                 .catch(()=>{
@@ -365,7 +367,7 @@ img.preview {
                     type: 'error',
                     title: 'Sweet-Alert : Error!'
                   });
-
+                  this.$Progress.fail();
                 })
             }
         },
