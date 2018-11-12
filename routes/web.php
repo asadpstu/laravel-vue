@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('dashboard');
 
 
 Route::get('api/authuser','Api\UserController@authuser');
-
+Route::post('/image/store', 'ImageController@store');
 
 //You user refresh page but content is from vue
 Route::get('{path}', "HomeController@index")->where('path','([A-z\d-\/_.]+)?');

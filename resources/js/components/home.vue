@@ -29,13 +29,14 @@ img.preview {
               </div>
               <!-- /.card-header -->
               <div class="card-body box-profile">
-                <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src="/img/profile.png" alt="User profile picture">
+                <div class="text-center" v-if="form">
+                  <img class="profile-user-img img-fluid img-circle" :src="'images/'+form.photo" alt="User profile picture" >
+  
                 </div>
 
                 <h3 class="profile-username text-center" v-if="form">{{ form.name }}</h3>
                 <p class="text-muted text-center" v-if="form"><i class="fas fa-hiking"></i><small style="margin-left:10px;">{{form.created_at | datefilter}}</small></p>
-                <p class="text-muted text-center" v-if="form">{{userdata.profession}}</p>
+                <p class="text-muted text-center" v-if="form">{{form.profession}}</p>
 
 
                 <div class="card-body">
@@ -96,16 +97,19 @@ img.preview {
                         <label for="inputExperience" class="col-sm-6 control-label">Upload Photo</label>
 
                         <div class="col-sm-10">
-                        <input @change="upload" type="file" name="file"  accept=".png, .jpg, .jpeg" />
+                        <input @change="onImageChange" type="file" name="file"  accept=".png, .jpg, .jpeg" />
                         
                         </div>
-                        <div class="image-preview" v-if="imageData.length > 0">
-			                <img class="preview" :src="imageData">
-			            </div>
+                        <!--<div class="image-preview" v-if="imageData.length > 0">
+			                       <img class="preview" :src="imageData">
+			                      </div>-->
+                           <div  class="image-preview" v-if="image">
+                              <img :src="image" class="preview" >
+                           </div>    
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="button" class="btn btn-warning" @click="updatepropic">Save</button>
+                          <button class="btn btn-success btn-block" @click="uploadImage">Upload Image</button>
                         </div>
                       </div>
                      
@@ -231,6 +235,7 @@ img.preview {
 		data: function() {
 		    return {
 		      userdata: [],
+          image: '',
 		      imageData: "",  // we will store base64 format of image in this string
 		      // Create a new form instance
               form: new Form({
@@ -328,7 +333,41 @@ img.preview {
                   });
 
              })
-           }
+           },
+           onImageChange(e) {
+                let files = e.target.files || e.dataTransfer.files;
+                if (!files.length)
+                    return;
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.image = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            uploadImage(){
+                axios.post('/image/store',{image: this.image})
+                .then(()=>{
+                  
+                  toast({
+                    type: 'success',
+                    title: 'Sweet-Alert : Success! Please Refresh the Page.'
+                  });
+
+                
+                })
+                .catch(()=>{
+
+                  toast({
+                    type: 'error',
+                    title: 'Sweet-Alert : Error!'
+                  });
+
+                })
+            }
         },
         created()
         {
