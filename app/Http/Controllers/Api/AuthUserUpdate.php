@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class AuthUserUpdate extends Controller
 {
@@ -104,5 +106,28 @@ class AuthUserUpdate extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function passwordchange(Request $request)
+    {
+        $pass = $request->newpassword;
+        $confpass = $request->confpassword;
+
+        if($pass == $confpass)
+        {
+            $user = User::findOrFail($request->userid);
+            $user->password = Hash::make($pass);
+            $user->save();
+            return response(['message'=>'OK']);
+        }
+        else
+        {
+            return response(['message'=>'NO']);
+        }
+        
+
+       // $vendorToken = User::where('id', $request->userid)
+       //               ->where('password',$request->oldpassword)
+       //               ->first();
     }
 }

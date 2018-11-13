@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet"  href="/css/app.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+  
 
   
 

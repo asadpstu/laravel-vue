@@ -68027,6 +68027,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -68035,6 +68060,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       userdata: [],
       image: '',
       imageData: "", // we will store base64 format of image in this string
+      newpassword: '',
+      confpassword: '',
+      oldpassword: '',
+      data: '',
       // Create a new form instance
       form: new Form({
         id: '',
@@ -68130,8 +68159,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     onImageChange: function onImageChange(e) {
       this.$Progress.start();
       var files = e.target.files || e.dataTransfer.files;
+
       if (!files.length) return;
-      this.createImage(files[0]);
+      if (files[0].size < 50000) {
+        this.createImage(files[0]);
+      } else {
+        toast({
+          type: 'error',
+          title: 'Sweet-Alert : Error!'
+        });
+        return;
+      }
     },
     createImage: function createImage(file) {
       var reader = new FileReader();
@@ -68159,6 +68197,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           title: 'Sweet-Alert : Error!'
         });
         _this4.$Progress.fail();
+      });
+    },
+    update: function update() {
+
+      axios.post('/password/update', {
+        userid: this.form.id,
+        newpassword: this.newpassword,
+        confpassword: this.confpassword
+
+      }).then(function () {
+
+        toast({
+          type: 'success',
+          title: 'Sweet-Alert : Success! Please Refresh the Page.'
+        });
+      }).catch(function () {
+
+        toast({
+          type: 'error',
+          title: 'Sweet-Alert : Error'
+        });
       });
     }
   },
@@ -68346,9 +68405,101 @@ var render = function() {
                         "div",
                         { staticClass: "tab-pane", attrs: { id: "timeline" } },
                         [
-                          _vm._v(
-                            "\n                  Second Tab\n                  "
-                          )
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-10 control-label",
+                                attrs: { for: "inputName" }
+                              },
+                              [_vm._v("New Password")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-10" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.newpassword,
+                                    expression: "newpassword"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "password",
+                                  name: "newpassword",
+                                  placeholder: "New Password"
+                                },
+                                domProps: { value: _vm.newpassword },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.newpassword = $event.target.value
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-10 control-label",
+                                attrs: { for: "inputName" }
+                              },
+                              [_vm._v("Confirm Password")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-10" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.confpassword,
+                                    expression: "confpassword"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  name: "confpassword",
+                                  placeholder: "Confirm Password"
+                                },
+                                domProps: { value: _vm.confpassword },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.confpassword = $event.target.value
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-offset-2 col-sm-10" },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.update }
+                                  },
+                                  [_vm._v("Update Password")]
+                                )
+                              ]
+                            )
+                          ])
                         ]
                       ),
                       _vm._v(" "),
@@ -68870,7 +69021,7 @@ var staticRenderFns = [
               staticClass: "nav-link",
               attrs: { href: "#timeline", "data-toggle": "tab" }
             },
-            [_vm._v("Timeline")]
+            [_vm._v("Update Password")]
           )
         ]),
         _vm._v(" "),

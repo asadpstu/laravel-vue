@@ -84,7 +84,7 @@ img.preview {
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active show" href="#activity" data-toggle="tab">Change Profile </a></li>
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Update Password</a></li>
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Update Information</a></li>
                 </ul>
               </div><!-- /.card-header -->
@@ -118,7 +118,32 @@ img.preview {
                  
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">
-                  Second Tab
+                      <div class="form-group">
+                        <label for="inputName" class="col-sm-10 control-label">New Password</label>
+
+                        <div class="col-sm-10">
+                          
+                          <input  type="password" v-model="newpassword" name="newpassword" placeholder="New Password"
+                          class="form-control" >
+                        
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputName" class="col-sm-10 control-label">Confirm Password</label>
+
+                        <div class="col-sm-10">
+                          
+                          <input  type="text" v-model="confpassword" name="confpassword" placeholder="Confirm Password"
+                          class="form-control" >
+                        
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="button" @click="update" class="btn btn-warning">Update Password</button>
+                        </div>
+                      </div>                      
                   </div>
                   <!-- /.tab-pane -->
 
@@ -237,6 +262,10 @@ img.preview {
 		      userdata: [],
           image: '',
 		      imageData: "",  // we will store base64 format of image in this string
+          newpassword: '',
+          confpassword: '',
+          oldpassword: '',
+          data : '',
 		      // Create a new form instance
               form: new Form({
                 id: '',
@@ -298,7 +327,7 @@ img.preview {
 	            var input2 = event.target.files[0];
 	            console.log(input2);
 	            // Ensure that you have a file before attempting to read it
-                if (input.files && input.files[0]) {
+                if (input.files && input.files[0] ) {
                 // create a new FileReader to read this image and convert to base64 format
                 var reader = new FileReader();
                 // Define a callback function to run, when FileReader finishes its job
@@ -312,6 +341,7 @@ img.preview {
                 reader.readAsDataURL(input.files[0]);
 
             }
+
                 
            },
            updatepropic()
@@ -337,9 +367,21 @@ img.preview {
            onImageChange(e) {
                 this.$Progress.start();
                 let files = e.target.files || e.dataTransfer.files;
+                
                 if (!files.length)
                     return;
+                if(files[0].size < 50000)
+                {
                 this.createImage(files[0]);
+                }
+                else
+                {
+                  toast({
+                    type: 'error',
+                    title: 'Sweet-Alert : Error!'
+                  });
+                  return;
+                }
             },
             createImage(file) {
                 let reader = new FileReader();
@@ -368,6 +410,33 @@ img.preview {
                     title: 'Sweet-Alert : Error!'
                   });
                   this.$Progress.fail();
+                })
+            },
+            update(){
+               
+               axios.post('/password/update',{
+                    userid: this.form.id,
+                    newpassword  : this.newpassword,
+                    confpassword : this.confpassword,
+                    
+
+                })
+                .then(()=>{
+                  
+                  
+                    toast({
+                      type: 'success',
+                      title: 'Sweet-Alert : Success! Please Refresh the Page.'
+                    });
+
+                })
+                .catch(()=>{
+                
+                  toast({
+                      type: 'error',
+                      title: 'Sweet-Alert : Error'
+                    });
+
                 })
             }
         },
