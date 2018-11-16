@@ -24,8 +24,15 @@ class ImageController extends Controller
        //$image= new FileUpload();
        $check = Auth::id();
        $admin = User::find($check);
+       $currentImage = $admin->photo;
        $admin->photo = $name;
        $admin->save();
+
+       if($currentImage != "profile.png" )
+       {
+         $havetodelete = public_path('images/').$currentImage;
+         @unlink($havetodelete);
+       }
 
        return response()->json(['success' => 'You have successfully uploaded an image'], 200);
      }
