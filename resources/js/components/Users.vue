@@ -26,7 +26,7 @@
                     <th>Action</th>
 
                   </tr>
-                  <tr v-for="singleuser in userlist">
+                  <tr v-for="singleuser in userlist.data">
                     <td>{{singleuser.id}}</td>
                     <td>{{singleuser.name | capitalize}}</td>
                     <td>{{singleuser.email}}</td>
@@ -46,6 +46,9 @@
                 </tbody></table>
               </div>
               <!-- /.card-body -->
+              <div class="card-footer">
+              <pagination :data="userlist" @pagination-change-page="getResults"></pagination>
+              </div>
             </div>
             <!-- /.card -->
           </div>  
@@ -225,8 +228,14 @@
             
             getuser(){
               this.$Progress.start()
-              axios.get('api/user').then(({data})=>(this.userlist = data.data));
+              axios.get('api/user').then(({data})=>(this.userlist = data));
               this.$Progress.finish()
+            },
+            getResults(page = 1) {
+                  axios.get('api/user?page=' + page)
+                    .then(response => {
+                      this.userlist = response.data;
+                    });
             },
             
             registeruser()

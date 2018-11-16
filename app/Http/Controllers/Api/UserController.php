@@ -18,10 +18,11 @@ class UserController extends Controller
      */
 
 
+
     public function index()
     {
         //
-        return User::latest()->paginate(10);
+        return User::latest()->paginate(2);
     }
 
     /**
@@ -92,8 +93,14 @@ class UserController extends Controller
         'type' => 'required',
         'biodata' => 'required:max:191',
         ]);
-
-        $userupdate->update($request->all());
+        //Hash::make($request['password']),
+        //$userupdate->update($request->all());
+        $userupdate->name = $request->name;
+        $userupdate->email = $request->email;
+        $userupdate->password = Hash::make($request->password);
+        $userupdate->type = $request->type;
+        $userupdate->biodata= $request->biodata;
+        $userupdate->save();
 
         return response(['message'=>'Updated succesfully']);
     }
@@ -106,11 +113,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //find or fail
-        $user = User::findOrFail($id);
-        $user->delete();
+        
 
-        //return response
-        return response(['message'=>'User deleted']);
+        
+        //find or fail
+        {    
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            //return response
+            return response(['message'=>'User deleted']);
+        }
     }
 }

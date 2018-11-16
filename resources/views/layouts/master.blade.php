@@ -88,6 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
+          @can('isAuthor')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-user"></i>
@@ -118,6 +119,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+          @endcan
+
+          @can('isAdmin')
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-user"></i>
+              <p>
+                Custom Menu
+                <i class="right fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <router-link to="#"  class="nav-link">
+                  <i class="fas fa-home"></i>
+                  <p>Menu # 1</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-h-square"></i>
+                  <p>Menu # 2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-archway"></i>
+                  <p>Menu # 3</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @endcan
 
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -149,8 +184,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </router-link>
               </li>
+
+
+
+
+
             </ul>
           </li>
+            @can('isUser') 
+              <li class="nav-item">
+                <router-link to="/profile" class="nav-link">
+                  <i class="fas fa-user"></i>
+                  <p>
+                    User Private Info
+                    <span class="right badge badge-danger">Only You</span>
+                  </p>
+                </router-link>
+              </li>
+            @endcan 
 
 
 
