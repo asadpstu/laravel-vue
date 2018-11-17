@@ -275,7 +275,7 @@
 
             Fire.$on('searching',()=>{
                  let search = this.$parent.search;
-                 if(search)
+                 
                  {
                    axios.get('api/search-user?q='+search)
                    .then((data)=>{
@@ -285,7 +285,7 @@
                         console.log("Error");
                    })
                  }
-                 else
+                 if(search == '')
                  {
                   toast({
                     type: 'warning',

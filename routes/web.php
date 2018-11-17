@@ -22,6 +22,9 @@ Route::get('/home', 'HomeController@index')->name('dashboard');
 
 Route::get('api/authuser','Api\UserController@authuser');
 Route::get('api/search-user','Api\UserController@searchuser');
+
+//Song List
+Route::get('api/songlist','SingerController@search');
 Route::post('/image/store', 'ImageController@store');
 Route::post('/password/update','Api\AuthUserUpdate@passwordchange');
 

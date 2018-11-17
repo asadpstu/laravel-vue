@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- SEARCH FORM -->
     
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" v-model="search" @keyup.enter="searchit" placeholder="Search by Name,Email,Type => Press Enter" aria-label="Search">
+        <input class="form-control form-control-navbar" type="search" v-model="search" @keyup="searchit" placeholder="(loadash search) => 1 Sec Delay" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="button" @click = "searchit">
             <i class="fa fa-search"></i>
@@ -93,66 +93,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link">
               <i class="fas fa-user"></i>
               <p>
-                Custom Menu
+                Unrelated
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               
               <li class="nav-item">
-                <router-link to="#"  class="nav-link">
+                <router-link to="/complex1"  class="nav-link">
                   <i class="fas fa-home"></i>
-                  <p>Menu # 1</p>
+                  <p>Query Builder # 1</p>
                 </router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <router-link  to="/complex2"  class="nav-link">
                   <i class="fas fa-h-square"></i>
-                  <p>Menu # 2</p>
-                </a>
+                  <p>Complex Query # 2</p>
+                </router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <router-link  to="/complex3"  class="nav-link">
                   <i class="fas fa-archway"></i>
-                  <p>Menu # 3</p>
-                </a>
+                  <p>Complex Query # 3</p>
+                </router-link>
               </li>
             </ul>
           </li>
           @endcan
 
-          @can('isAdmin')
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="fas fa-user"></i>
-              <p>
-                Custom Menu
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              
-              <li class="nav-item">
-                <router-link to="#"  class="nav-link">
-                  <i class="fas fa-home"></i>
-                  <p>Menu # 1</p>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-h-square"></i>
-                  <p>Menu # 2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-archway"></i>
-                  <p>Menu # 3</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          @endcan
+
 
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->

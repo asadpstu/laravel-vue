@@ -128,11 +128,17 @@ class UserController extends Controller
 
     public function searchuser()
     {
-        $getQueryString = \Request::get('q');
+        if($getQueryString = \Request::get('q'))
+        {
         $users = User::where('name','LIKE',"%$getQueryString%")
                      ->orwhere('email','LIKE',"%$getQueryString%")
                      ->orwhere('type','LIKE',"%$getQueryString%")
                      ->paginate(2);
+        }
+        else
+        {
+        $users = User::latest()->paginate(5);
+        }
         return $users;
 
     }

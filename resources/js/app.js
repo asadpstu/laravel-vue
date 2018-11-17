@@ -32,6 +32,10 @@ let routes = [
   { path: '/users', component: require('./components/Users.vue') },
   { path: '/home', component: require('./components/home.vue') },//this will work as default route
 
+  { path: '/complex1', component: require('./components/complex1.vue') },
+  { path: '/complex2', component: require('./components/complex2.vue') },
+  { path: '/complex3', component: require('./components/complex3.vue') },
+
 ]
 
 
@@ -82,11 +86,13 @@ const app = new Vue({
       search: ''   
     },
     methods:{
-      searchit()
-      {
+      searchit:_.debounce(()=>{
+        //debounce used for requesting query after one second
         //Now Emit Function we will use.
         //To use Emit we need to declare or import anything we can say
+
         Fire.$emit("searching");
-      }
+      },1000)
+
     }
 });
