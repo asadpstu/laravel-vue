@@ -264,14 +264,36 @@
               this.getuser();
               
               
-            },
+            }
 
         },          
         created() {
             this.$Progress.start()
             this.getuser();
             this.$Progress.finish()
-            setInterval(()=>this.getuser(), 10000);
+            //setInterval(()=>this.getuser(), 60000);
+
+            Fire.$on('searching',()=>{
+                 let search = this.$parent.search;
+                 if(search)
+                 {
+                   axios.get('api/search-user?q='+search)
+                   .then((data)=>{
+                        this.userlist = data.data;
+                   })
+                   .catch(()=>{
+                        console.log("Error");
+                   })
+                 }
+                 else
+                 {
+                  toast({
+                    type: 'warning',
+                    title: 'Warning : Please Write Something On The Search Bar'
+                  });
+                 }
+
+            })
         }
     }
 </script>

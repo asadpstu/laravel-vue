@@ -18,6 +18,7 @@ import VueRouter from 'vue-router'
 import { Form, HasError, AlertError } from 'vform'
 window.Form = Form;
 window.swal = swal;
+window.Fire = new Vue();
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -76,5 +77,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data:{
+      search: ''   
+    },
+    methods:{
+      searchit()
+      {
+        //Now Emit Function we will use.
+        //To use Emit we need to declare or import anything we can say
+        Fire.$emit("searching");
+      }
+    }
 });

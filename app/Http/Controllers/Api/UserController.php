@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return User::latest()->paginate(2);
+        return User::latest()->paginate(5);
     }
 
     /**
@@ -124,5 +124,16 @@ class UserController extends Controller
             //return response
             return response(['message'=>'User deleted']);
         }
+    }
+
+    public function searchuser()
+    {
+        $getQueryString = \Request::get('q');
+        $users = User::where('name','LIKE',"%$getQueryString%")
+                     ->orwhere('email','LIKE',"%$getQueryString%")
+                     ->orwhere('type','LIKE',"%$getQueryString%")
+                     ->paginate(2);
+        return $users;
+
     }
 }

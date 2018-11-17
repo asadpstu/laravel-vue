@@ -17505,6 +17505,7 @@ window.Vue = __webpack_require__(161);
 
 window.Form = __WEBPACK_IMPORTED_MODULE_4_vform__["Form"];
 window.swal = __WEBPACK_IMPORTED_MODULE_2_sweetalert2___default.a;
+window.Fire = new Vue();
 
 Vue.component(__WEBPACK_IMPORTED_MODULE_4_vform__["HasError"].name, __WEBPACK_IMPORTED_MODULE_4_vform__["HasError"]);
 Vue.component(__WEBPACK_IMPORTED_MODULE_4_vform__["AlertError"].name, __WEBPACK_IMPORTED_MODULE_4_vform__["AlertError"]);
@@ -17555,7 +17556,17 @@ Vue.component('example-component', __webpack_require__(186));
 
 var app = new Vue({
   el: '#app',
-  router: router
+  router: router,
+  data: {
+    search: ''
+  },
+  methods: {
+    searchit: function searchit() {
+      //Now Emit Function we will use.
+      //To use Emit we need to declare or import anything we can say
+      Fire.$emit("searching");
+    }
+  }
 });
 
 /***/ }),
@@ -66865,9 +66876,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.$Progress.start();
     this.getuser();
     this.$Progress.finish();
-    setInterval(function () {
-      return _this5.getuser();
-    }, 10000);
+    //setInterval(()=>this.getuser(), 60000);
+
+    Fire.$on('searching', function () {
+      var search = _this5.$parent.search;
+      if (search) {
+        axios.get('api/search-user?q=' + search).then(function (data) {
+          _this5.userlist = data.data;
+        }).catch(function () {
+          console.log("Error");
+        });
+      } else {
+        toast({
+          type: 'warning',
+          title: 'Warning : Please Write Something On The Search Bar'
+        });
+      }
+    });
   }
 });
 
