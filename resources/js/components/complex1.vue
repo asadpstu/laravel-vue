@@ -91,6 +91,7 @@
                 axios.get('api/songlist')
                    .then((data)=>{
                         this.songlist = data.data;
+                        console.log(this.songlist);
                    })
                    .catch(()=>{
                         console.log("Error");
