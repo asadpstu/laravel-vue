@@ -117,6 +117,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Complex Query # 3</p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link  to="/component4"  class="nav-link">
+                  <i class="fas fa-archway"></i>
+                  <p>Complex</p>
+                </router-link>
+              </li>
+              
             </ul>
           </li>
           @endcan

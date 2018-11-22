@@ -35,6 +35,8 @@ let routes = [
   { path: '/complex1', component: require('./components/complex1.vue') },
   { path: '/complex2', component: require('./components/complex2.vue') },
   { path: '/complex3', component: require('./components/complex3.vue') },
+  { path: '/component4', component: require('./components/component4.vue') },
+
 
 ]
 
