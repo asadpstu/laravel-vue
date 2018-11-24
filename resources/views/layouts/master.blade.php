@@ -123,6 +123,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Complex</p>
                 </router-link>
               </li>
+              <li class="nav-item">
+                <router-link  to="/conponent5"  class="nav-link">
+                  <i class="fas fa-archway"></i>
+                  <p>Facades - Service Container</p>
+                </router-link>
+              </li>
               
             </ul>
           </li>

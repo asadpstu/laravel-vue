@@ -1,5 +1,5 @@
 <?php
-
+use App\Services\FacebookServiceFacade;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	// $fb = new App\Services\FacebookService();
+	// $facebook =  $fb->getAll();
+	$facebook = FacebookServiceFacade::getAll();
+    return view('welcome')->with('facebook',$facebook);
 });
 
 Auth::routes();
@@ -27,6 +30,8 @@ Route::get('api/search-user','Api\UserController@searchuser');
 Route::get('api/songlist','SingerController@search');
 Route::post('/image/store', 'ImageController@store');
 Route::post('/password/update','Api\AuthUserUpdate@passwordchange');
+
+Route::get('facade/information','HomeController@facede');
 
 //You user refresh page but content is from vue
 Route::get('{path}', "HomeController@index")->where('path','([A-z\d-\/_.]+)?');

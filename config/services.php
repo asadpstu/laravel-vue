@@ -35,4 +35,12 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'Information' => [
+        'Rab' => 'Rapid Action Batllion',
+        'Police' => 'Dark side of Bangladesh',
+        'Navy' => 'Pride of Bangladesh',
+        'Doctor' => 'Girls Dream',
+        'Engineer' => 'Boys Dream',
+    ],
+
 ];
