@@ -84,9 +84,13 @@
 
                 <div class="links">
                     @if($facebook)
-                      @foreach($facebook as $singlefacebook)
-                        <a href="#"> {{$singlefacebook}} </a>
-                      @endforeach
+                      
+                        <a href="{{ $facebook['Rab'][1] }}"> {{ $facebook['Rab'][0] }} </a>
+                        <a href="{{ $facebook['Pol'][1] }}"> {{ $facebook['Pol'][0] }} </a>
+                        <a href="{{ $facebook['Navy'][1] }}"> {{ $facebook['Navy'][0] }} </a>
+                        <a href="{{ $facebook['Doc'][1] }}"> {{ $facebook['Doc'][0] }} </a>
+                        <a href="{{ $facebook['Engg'][1] }}"> {{ $facebook['Engg'][0] }} </a>
+                      
                     @endIf
                 </div>
             </div>

@@ -15,6 +15,7 @@ Route::get('/', function () {
 	// $fb = new App\Services\FacebookService();
 	// $facebook =  $fb->getAll();
 	$facebook = FacebookServiceFacade::getAll();
+	//dd($facebook);
     return view('welcome')->with('facebook',$facebook);
 });
 
